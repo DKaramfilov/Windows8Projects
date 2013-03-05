@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="PieChartTakingControlOfLabel.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PieChartTakingControlOfLabel"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:telerik="using:Telerik.UI.Xaml.Controls.Chart"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <local:MainVM x:Key="ViewModel">
+        </local:MainVM>
+        <local:PieLabelStrategy x:Key="Strategy">
+            <local:PieLabelStrategy.Binding>
+                <telerik:PropertyNameDataPointBinding PropertyName="Department" />
+            </local:PieLabelStrategy.Binding>
+        </local:PieLabelStrategy>
+    </Page.Resources>
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" 
+          DataContext="{StaticResource ViewModel}">
+        <telerik:RadPieChart Palette="{Binding DefaultLightPalette}" Margin="0,71,82,58" Width="500">
+            <telerik:PieSeries ItemsSource="{Binding Data}">
+                <telerik:PieSeries.ValueBinding>
+                    <telerik:PropertyNameDataPointBinding PropertyName="Millions" />
+                </telerik:PieSeries.ValueBinding>
+                <telerik:PieSeries.LabelDefinitions>
+                    <telerik:ChartSeriesLabelDefinition Margin="-15" Strategy="{StaticResource Strategy}" />
+                </telerik:PieSeries.LabelDefinitions>
+            </telerik:PieSeries>
+        </telerik:RadPieChart>
+
+    </Grid>
+</Page>
